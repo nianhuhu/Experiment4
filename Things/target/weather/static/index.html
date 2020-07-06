@@ -1,0 +1,172 @@
+
+<html>
+<body>
+用户名:<input type="text" name="rootname" id="rootname" value="yw"></br>
+密码:<input type="password" name="password" id="password" value="123456"></br>
+
+<input id="commitdata"  value="连接" type="button" onclick="commit()"/></br>
+
+<div id="box">
+    手动<input type="radio" name="alternative" id="hand" value="1" onclick="change()"/><br /><br />
+    自动<input type="radio" name="alternative" id="auto" value="2" onclick="change()"/>
+</div>
+<div id="change">
+    <img id="dim" src="img/dim.svg" alt="" />
+    <img id="light" src="img/light.svg" />
+</div>
+<table>
+    <tr>
+        <td>
+            <span class="name">当前开关状态:</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="now_switch" id="now_switch">关</span><br />
+            <div class="icon">
+                <span>当前光照强度:</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="now_lux" id="now_lux">0</span>
+            </div>
+        </td>
+    <tr>
+        <td>
+			<div class="dataBox">
+				<input name="iuputs" id="inputs" placeholder="输入查询的日期"/>
+				<button  onclick="xx()" id="search">查询</button ><br />
+			</div>
+            
+            <span class="name" style="margin-top: 25px;">当日开灯时间:</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="day_on" id="day_on">xxxx-xx-xx xx:xx</span><br />
+            <div class="icon">
+                <span>当日关灯时间:</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="day_off" id="day_off">xxxx-xx-xx xx:xx</span>
+            </div>
+        </td>
+    </tr>
+    </tr>
+</table>
+<div>
+    <button id="btn" onclick="changes()">切换</button>
+</div>
+
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="css/things.css"/>
+
+<script type="text/javascript">
+
+
+    function historyShow() {
+        var tag_mac =  $("#mac_id").val();
+
+        $.ajax({
+            url : "/historyData",
+            type : "post",
+            data : JSON.stringify({tag_mac:tag_mac}),
+            contentType:"application/json;charset=UTF-8",
+            dateType : "json",
+            success:function (data) {
+                 var weather = data;//[2, 85, 75, 59, 60, 76, 74 ];
+                 option.series[0].data = weather ;
+
+                 myChart.setOption(option, true);
+
+            }
+        });
+
+    }
+
+    function show() {
+        var luxNumber = '0';
+        $.ajax({
+            url : "/showMessage",
+            type : "post",
+            data : JSON.stringify({luxNumber:luxNumber}),
+            contentType:"application/json;charset=UTF-8",
+            dateType : "json",
+            success:function (data) {
+                document.getElementById("now_switch").innerHTML = "111";
+                document.getElementById("now_lux").innerHTML = data.luxNumber;
+
+            }
+        });
+
+    }
+
+    // setInterval(function () {
+    //    changes();
+
+    // },1000);
+
+
+
+</script>
+<script type="text/javascript">
+    
+	 window.onload = function changes(){
+
+        var flag = true;
+        var show_number;
+        $("#btn").click(function(){
+            if(flag){
+                $("#change #dim").hide();
+                $("#change #light").show();
+                flag = false;
+                document.getElementById("now_switch").innerHTML = "开";
+
+            }else{
+                $("#change #light").hide();
+                $("#change #dim").show();
+                document.getElementById("now_switch").innerHTML = "关";
+				//alert(flag);
+                flag = true;
+            }
+        })
+    
+	
+	
+	}
+	
+    function change(){
+        $("input[name='alternative']").click(function(){
+            var value = $("input[name='alternative']:checked").val();
+            if(value == 1){
+                //alert("现在是手动模式！")
+                $("#btn").show();
+            }else if(value == 2){
+                //alert("现在是自动模式！")
+                $("#btn").hide();
+            }
+        })
+
+    }
+    // }
+</script>
+
+<script type="text/javascript">
+
+
+    function xx() {
+        alert("asadasasdas");
+    }
+
+    function commit() {
+        var username = $("#rootname").val();
+        var password = $("#password").val();
+
+        $.ajax({
+        url : "/sendMessage",
+        type : "post",
+        data : JSON.stringify({username:username,password:password}),
+        contentType:"application/json;charset=UTF-8",
+        dateType : "json",
+        success:function (data) {
+
+            if (data > 0){
+                alert("连接成功");
+                }
+            else {
+                alert("连接失败,请联系管理员!");
+            }
+            }
+        });
+
+    }
+    
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+#box{
+	width: 200px;
+	margin: 50px 0px 50px 100px;
+	float: left;
+}
+#change{
+	width: 300px;
+	height: 300px;
+	margin: 50px auto;
+	float: left;
+	width: 300px;
+	height: 300px;
+	margin: 50px auto;
+	float: left;
+}
+#change #dim{
+	display: block;
+}
+#change #light{
+	display: none;
+}
+#btn{
+	width: 100px;
+	height: 45px;
+	border: none;
+	font-size: 18px;
+	background: deepskyblue;
+	color: white;
+	margin-top: 100px;
+	outline: none;
+}
+#btn:hover{
+	background: pink;
+}
+table
+{
+	position: absolute;
+	top: 360px;
+	left: 250px;
+	width: 20px;
+	border-collapse: collapse;
+	text-align: center;
+	table-layout: fixed;
+	width: 400px;
+	height: 300px;
+	float: left;
+}
+.right{
+	width: 250px;
+	height: 500px;
+	float: left;
+	border: 1px solid #cad9ea;
+	border-left: none;
+}
+table td
+{
+	border: 1px solid #cad9ea;
+	color: #666;
+	height: 30px;
+	position: relative;
+}
+td .heart{
+	position: absolute;
+	top: 5px;
+	left: 30px;
+	width: 20px;
+}
+td .heart_rate{
+	line-height: 20px;
+	font-size: 26px;
+	font-weight: 700;
+}
+td .icon{
+	margin-top:20px ;
+	position: relative;
+}
+td button{
+	text-align: center;
+	height: 30px;
+	width: 150px;
+	margin-top: 5px;
+	border: 1px solid #cad9ea;
+	margin:5px 20px ;
+	border-radius: 20px;
+}
+.dataBox{
+	height: 90px;
+}
+#inputs{
+	width: 200px;
+	height: 50px;
+	border:1px solid #cad9ea;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+#search{
+	height: 48px;
+	width: 75px;
+	margin-top: 5px;
+	border: 1px solid #cad9ea;
+	border-radius: 5px;
+}
